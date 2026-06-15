@@ -1,0 +1,1 @@
+# Sistema de anotações de pensamentos e análises de sentimentos
