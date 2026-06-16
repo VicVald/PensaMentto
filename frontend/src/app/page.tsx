@@ -1,7 +1,45 @@
+"use client";
+
+import { useState } from "react";
 
 export default function Home() {
+
+  const [text, setText] = useState("")
+
+  async function handleSubmit() {
+
+    console.log(text);
+    if (!text.trim()) {
+        alert("Digite algo no diário.");
+        return;
+    }
+
+    await fetch("/api/journal", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          text: text,
+          tags: ["diario"]
+      })
+
+    });
+
+    alert("Diário salvo!");
+
+  }
+
   return (
     <div className="">
+      <textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+
+      <button onClick={handleSubmit}>
+        Salvar
+      </button>
     </div>
   );
 }
