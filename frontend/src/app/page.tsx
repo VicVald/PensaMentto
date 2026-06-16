@@ -26,8 +26,6 @@ export default function Home() {
 
     });
 
-    alert("Diário salvo!");
-
   }
 
   return (
