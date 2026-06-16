@@ -18,7 +18,7 @@ export async function GET(req: Request) {
         return Response.json(result);
     } catch (error) {
         return Response.json(
-            { error: "Erro ao listar diários" },
+            { error: error },
             { status: 500 }
         );
     }
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
         return Response.json(result);
     } catch (error) {
         return Response.json(
-            { error: "Erro ao salvar diário" },
+            { error: error },
             { status: 500 },
         );
     }

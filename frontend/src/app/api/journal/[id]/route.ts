@@ -26,7 +26,7 @@ export async function GET(
         return Response.json(result);
     } catch (error) {
         return Response.json(
-            { error: "Erro ao buscar diário" },
+            { error: error },
             { status: 500 }
         );
     }
@@ -61,7 +61,7 @@ export async function PUT(
         return Response.json(result);
     } catch (error) {
         return Response.json(
-            { error: "Erro ao atualizar diário" },
+            { error: error },
             { status: 500 }
         );
     }
@@ -87,7 +87,7 @@ export async function DELETE(
         return Response.json({ message: "Diário deletado com sucesso" });
     } catch (error) {
         return Response.json(
-            { error: "Erro ao deletar diário" },
+            { error: error },
             { status: 500 }
         );
     }
