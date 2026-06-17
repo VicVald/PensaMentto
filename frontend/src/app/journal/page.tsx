@@ -36,7 +36,7 @@ export default function JournalPage() {
           className="input-text"
           placeholder="Digite aqui..."
         />
-        <button onClick={handleSubmit}>Salvar</button>
+        <button className="cta-button" onClick={handleSubmit}>Salvar</button>
       </section>
       <section className="journal-list-section">
         <FindAll />

@@ -1,0 +1,226 @@
+.container {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 20% 20%, #eae8fd 0%, rgba(245, 243, 255, 0.9) 30%, #ffffff 70%),
+    radial-gradient(circle at 80% 25%, rgba(234, 232, 253, 0.9) 0%, rgba(255, 255, 255, 0.85) 35%, rgba(245, 243, 255, 0.75) 65%),
+    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.95) 0%, rgba(245, 243, 255, 0.85) 35%, rgba(234, 232, 253, 0.8) 80%);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease-in-out infinite alternate;
+  overflow: hidden;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 0%, 0% 20%, 10% 100%;
+  }
+
+  50% {
+    background-position: 50% 10%, 40% 50%, 90% 60%;
+  }
+
+  100% {
+    background-position: 100% 0%, 100% 30%, 50% 10%;
+  }
+}
+
+.backgroundTitle {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.backgroundTitleText {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(6rem, 18vw, 15rem);
+  color: rgba(93, 53, 177, 0.16);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+  text-shadow: 0 0 24px rgba(93, 53, 177, 0.08);
+}
+
+.starsContainer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #a89ee8;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+
+.starActive {
+  opacity: 1;
+  animation-name: twinkle;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #e8e4f0;
+  border-radius: 28px;
+  padding: 48px 56px;
+  box-shadow: 0 8px 32px rgba(120, 110, 180, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  color: #3d3560;
+  text-align: center;
+}
+
+.faceArea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.eyeWrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye {
+  width: 86px;
+  height: 86px;
+  overflow: visible;
+  will-change: transform;
+}
+
+.eyeGroup {
+  transform-origin: center center;
+  transition: transform 80ms ease-in-out;
+}
+
+.pupilGroup {
+  transition: transform 0.12s ease-out;
+}
+
+.smile {
+  width: 140px;
+  height: 40px;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.smileVisible {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.hand {
+  position: absolute;
+  width: 40px;
+  height: 48px;
+  border: 2.5px solid #2d2640;
+  border-radius: 20px 20px 18px 18px;
+  background: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  transform: translateX(0);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transform-origin: bottom center;
+}
+
+.leftHand {
+  left: -35px;
+  bottom: 30px;
+  transform: translateX(-20px);
+}
+
+.rightHand {
+  right: -35px;
+  bottom: 30px;
+  transform: translateX(20px);
+}
+
+.handVisible {
+  opacity: 1;
+  transform: translateX(0);
+  animation: waveHand 0.5s ease-in-out alternate infinite;
+}
+
+@keyframes waveHand {
+  from {
+    transform: translateX(0) rotate(-15deg);
+  }
+  to {
+    transform: translateX(0) rotate(15deg);
+  }
+}
+
+.actionButton {
+  border: 2px solid #3d3560;
+  background: transparent;
+  color: #3d3560;
+  border-radius: 12px;
+  padding: 12px 48px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.actionButton:hover {
+  background: #3d3560;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 520px) {
+  .card {
+    padding: 36px 28px;
+    margin: 16px;
+  }
+
+  .eyeWrapper {
+    gap: 14px;
+  }
+
+  .hand {
+    display: none;
+  }
+}

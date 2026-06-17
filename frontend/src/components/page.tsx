@@ -40,7 +40,7 @@ export default function FindAll() {
 
   return (
     <div>
-      <button onClick={handleSubmit}>Buscar Diários</button>
+      <button className="fetch-button" onClick={handleSubmit}>Buscar Diários</button>
       {registers.map((register: JournalType) => (
         <div 
           key={register._id!}
@@ -56,9 +56,8 @@ export default function FindAll() {
           ))}
 
           <button
-            onClick={() =>
-              handleDelete(register._id.toString())
-            }
+            className="delete-button"
+            onClick={() => handleDelete(register._id.toString())}
           >
             Apagar
           </button>
