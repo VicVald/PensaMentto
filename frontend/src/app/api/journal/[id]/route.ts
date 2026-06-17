@@ -1,5 +1,4 @@
 import { connectDB } from "@/lib/mongodb";
-import { JournalType } from "@/models/Journal";
 import {
     getJournal,
     editJournal,
@@ -7,49 +6,60 @@ import {
 } from "@/services/journal.service";
 
 // GET - Buscar diário por ID
-export async function GET(
-    req: Request,
-    { params }: { params: { id: string } }
-) {
-    try {
-        await connectDB();
+// export async function GET(
+//     req: Request,
+//     { params }: { params: { id: string } }
+// ) {
+//     try {
+//         await connectDB();
 
-        const result = await getJournal(params.id);
+//         const result = await getJournal(params.id);
 
-        if (!result) {
-            return Response.json(
-                { error: "Diário não encontrado" },
-                { status: 404 }
-            );
-        }
+//         if (!result) {
+//             return Response.json(
+//                 { error: "Diário não encontrado" },
+//                 { status: 404 }
+//             );
+//         }
 
-        return Response.json(result);
-    } catch (error) {
-        return Response.json(
-            { error: error },
-            { status: 500 }
-        );
-    }
-}
+//         return Response.json(result);
+//     } catch (error) {
+//         return Response.json(
+//             { error: error },
+//             { status: 500 }
+//         );
+//     }
+// }
 
 // PUT - Atualizar diário
 export async function PUT(
     req: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
         await connectDB();
+        
+        const { id } = await context.params;
 
-        const body = await req.json() as Partial<JournalType>;
+        const body = await req.json() as Partial<{
+            newText: string;
+            tags: string[];
+            }>;
 
-        if (body.text !== undefined && !body.text.trim()) {
+        const { newText, tags } = body;
+
+        if (newText !== undefined && !newText.trim()) {
             return Response.json(
                 { error: "Texto não pode estar vazio" },
                 { status: 400 }
             );
         }
 
-        const result = await editJournal(params.id, body);
+
+        const result = await editJournal(id,{
+            text: newText,
+            tags,
+            });
 
         if (!result) {
             return Response.json(
@@ -82,12 +92,12 @@ export async function DELETE(
         await console.log("parans" + id);
         console.log("result" + result);
 
-        // if (!result) {
-        //     return Response.json(
-        //         { error: "Diário não encontrado" },
-        //         { status: 404 }
-        //     );
-        // }
+        if (!result) {
+            return Response.json(
+                { error: "Diário não encontrado" },
+                { status: 404 }
+            );
+        }
 
         return Response.json({ message: "Diário deletado com sucesso" });
     } catch (error) {

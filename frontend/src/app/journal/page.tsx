@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import FindAll from "@/components/page";
+import FindAll from "@/app/findAll/page";
+import FindByText from "@/app/findByText/page";
 
 export default function JournalPage() {
   const [text, setText] = useState("");
@@ -38,6 +39,13 @@ export default function JournalPage() {
         />
         <button onClick={handleSubmit}>Salvar</button>
       </section>
+
+      <section>
+        <FindByText />
+      </section>
+
+      <hr></hr>
+
       <section className="journal-list-section">
         <FindAll />
       </section>
