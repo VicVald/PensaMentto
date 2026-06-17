@@ -6,6 +6,7 @@ import {
     deleteJournal
 } from "@/repository/journal.repository";
 import { JournalType } from "@/models/Journal";
+import { searchJournalsByText } from "@/repository/journal.repository";
 import { z } from "zod";
 import Groq from "groq-sdk";
 
@@ -69,8 +70,6 @@ export async function getJournal(id: string) {
     return getJournalById(id);
 }
 
-
-
 export async function listJournals(limit: number = 10, skip: number = 0) {
     return getAllJournals(limit, skip);
 }
@@ -93,4 +92,8 @@ export async function editJournal(id: string, journal: Partial<JournalType>) {
 export async function removeJournal(id: string) {
     console.log(id);
     return deleteJournal(id);
+}
+
+export async function searchJournals(text: string, limit = 10, skip = 0) {
+    return searchJournalsByText(text, limit, skip);
 }
